@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const { auth } = require("express-oauth2-jwt-bearer");
 const { addNewUser } = require("./middlewares/addNewUser");
 const reminderRouter = require("./routes/reminders");
+const postRouter = require("./routes/posts");
 
 require("dotenv").config({
     path:"./.env"
@@ -33,6 +34,7 @@ const validateAccessToken = auth({
 // Protected API endpoints
 app.use(validateAccessToken, addNewUser);
 app.use('/reminders', reminderRouter);
+app.use('/posts', postRouter);
 
 
 app.listen(process.env.PORT, ()=>{
