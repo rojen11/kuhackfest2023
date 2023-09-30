@@ -182,7 +182,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> logoutAction() async {
-    await auth0.webAuthentication(scheme: appScheme).logout();
+    await auth0.webAuthentication(scheme: "application").logout();
 
     setState(() {
       _credentials = null;
