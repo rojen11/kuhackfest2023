@@ -5,7 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Starting extends StatelessWidget {
-  const Starting({super.key});
+  const Starting({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,36 +21,41 @@ class Starting extends StatelessWidget {
               Color(0xFF1D192B), // Your desired color at the bottom
             ],
           )),
-          child: Column(
-            children: [
-              const Row(
-                children: [RoundedButton(), RoundedButton()],
-              ),
-              FlutterMap(
-                options: MapOptions(
-                  center: const LatLng(51.509364, -0.128928),
-                  zoom: 9.2,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Row(
+                    children: [RoundedButton()],
+                  ),
                 ),
-                nonRotatedChildren: [
-                  RichAttributionWidget(
-                    attributions: [
-                      TextSourceAttribution(
-                        'OpenStreetMap contributors',
-                        onTap: () => launchUrl(
-                            Uri.parse('https://openstreetmap.org/copyright')),
-                      ),
-                    ],
+                FlutterMap(
+                  options: MapOptions(
+                    center: const LatLng(51.509364, -0.128928),
+                    zoom: 9.2,
                   ),
-                ],
-                children: [
-                  TileLayer(
-                    urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    userAgentPackageName: 'com.example.app',
-                  ),
-                ],
-              ),
-            ],
+                  nonRotatedChildren: [
+                    RichAttributionWidget(
+                      attributions: [
+                        TextSourceAttribution(
+                          'OpenStreetMap contributors',
+                          onTap: () => launchUrl(
+                              Uri.parse('https://openstreetmap.org/copyright')),
+                        ),
+                      ],
+                    ),
+                  ],
+                  children: [
+                    TileLayer(
+                      urlTemplate:
+                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      userAgentPackageName: 'com.example.app',
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
