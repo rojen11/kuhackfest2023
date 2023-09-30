@@ -16,11 +16,11 @@ const reminderSchema = new mongoose.Schema({
         required: true
     },
     start_time:{
-        type: Time,
+        type: Date,
         required: true
     },
     end_time:{
-        type: Time,
+        type: Date,
         required: true
     },
     created_at: {
