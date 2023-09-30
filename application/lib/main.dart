@@ -2,6 +2,7 @@
 ///          External Packages
 /// -----------------------------------
 
+import 'package:application/screens/starting.dart';
 import 'package:flutter/material.dart';
 
 import 'package:auth0_flutter/auth0_flutter.dart';
@@ -117,7 +118,7 @@ class Login extends StatelessWidget {
 
 void main() async {
   await dotenv.load(fileName: ".env");
-  runApp(const MyApp());
+  runApp(const Starting());
 }
 
 class MyApp extends StatefulWidget {
