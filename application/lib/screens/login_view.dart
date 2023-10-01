@@ -1,3 +1,4 @@
+import 'package:application/screens/home_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:auth0_flutter/auth0_flutter.dart';
@@ -8,8 +9,8 @@ import '../widgets/profile.dart';
 
 const appScheme = 'flutterdemo';
 
-class MyApp extends StatefulWidget {
-  const MyApp({final Key? key}) : super(key: key);
+class LoginView extends StatefulWidget {
+  const LoginView({final Key? key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -19,7 +20,7 @@ class MyApp extends StatefulWidget {
 ///              App State
 /// -----------------------------------
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<LoginView> {
   Credentials? _credentials;
   late Auth0 auth0;
 
@@ -36,7 +37,7 @@ class _MyAppState extends State<MyApp> {
           child: isBusy
               ? const CircularProgressIndicator()
               : _credentials != null
-                  ? Profile(logoutAction, _credentials?.user)
+                  ? HomeView()
                   : Login(loginAction, errorMessage),
         ),
       ),
@@ -57,6 +58,7 @@ class _MyAppState extends State<MyApp> {
 
       setState(() {
         _credentials = credentials;
+        isBusy = false;
       });
     } on Exception catch (e, s) {
       debugPrint('login error: $e - stack: $s');
