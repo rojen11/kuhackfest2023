@@ -1,15 +1,24 @@
-import 'package:application/screens/camera_view.dart';
 import 'package:application/screens/home_view.dart';
 import 'package:application/screens/login_view.dart';
-import 'package:application/widgets/login.dart';
 import 'package:application/screens/onboarding_view.dart';
-import 'package:application/screens/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
-  runApp(Onboarding(
+  runApp(
+    OnboardingInit(),
+  );
+}
+
+class OnboardingInit extends StatelessWidget {
+  const OnboardingInit({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Onboarding(
       title: "Title 1",
       description: "description 1",
       onNext: (context) {
@@ -30,7 +39,7 @@ void main() async {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HomeView(),
+                              builder: (context) => const LoginView()
                             ),
                             (route) => false);
                       },
@@ -41,5 +50,7 @@ void main() async {
             ),
           ),
         );
-      }));
+      },
+    );
+  }
 }
