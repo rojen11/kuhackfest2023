@@ -3,14 +3,14 @@ const  mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: [true, "You Must enter a Name"],
+        optional: true,
         maxLength: [50, "User name cannot exceed 50 characters"],
         minLength: [2, "User name should be at least 2 characters Long."]
     },
 
     email: {
         type: String,
-        required: [true, "Email is a required parameter."],
+        optional: true,
         unique: [true, "Email already registered."]
     },
 
@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema({
         optional: true
     }
 });
+
 
 const user = mongoose.model("User", userSchema);
 
