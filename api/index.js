@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const reminderRouter = require('./routes/reminders');
 const postRouter = require('./routes/posts');
+const feedRouter = require('./routes/feed');
 const { auth } = require("express-oauth2-jwt-bearer");
 const { addNewUser } = require("./middlewares/addNewUser");
 
@@ -22,13 +23,11 @@ const validateAccessToken = auth({
     issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}`,
     audience: process.env.AUTH0_AUDIENCE,
 });
-
-
-// Public API endpoints
-
+app.use(express.json());
 // Protected API endpoints
 app.use(validateAccessToken);
 app.use(addNewUser);
+app.use('/feed', feedRouter);
 app.use('/reminders', reminderRouter);
 app.use('/posts', postRouter);
 
