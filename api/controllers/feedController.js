@@ -1,13 +1,18 @@
 const Post = require('../models/post');
 
 exports.showFeed = async (req, res) => {
-    const posts = await Post.find({});
-    const nearby_posts = posts.map(p => {
-        if(calculateDistance(req.body.latitude, req.body.longitude, p.latitude, p.longitude) <= 5){
-            return p;
-        }
-    });
-    res.json(nearby_posts);
+    try{
+        const posts = await Post.find({});
+        const nearby_posts = posts.map(p => {
+            if(calculateDistance(req.body.latitude, req.body.longitude, p.latitude, p.longitude) <= 5){
+                return p;
+            }
+        });
+        res.json(nearby_posts);
+    }catch(error){
+        console.error('Error showing feed:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
 
 const calculateDistance = async (lat1, long1, lat2, long2) => {
