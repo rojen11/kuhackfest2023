@@ -57,6 +57,7 @@ class _MyAppState extends State<MyApp> {
 
       setState(() {
         _credentials = credentials;
+        isBusy = false;
       });
     } on Exception catch (e, s) {
       debugPrint('login error: $e - stack: $s');
