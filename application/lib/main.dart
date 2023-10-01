@@ -6,6 +6,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     OnboardingInit(),
   );
@@ -19,28 +21,27 @@ class OnboardingInit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Onboarding(
-      title: "Title 1",
-      description: "description 1",
+      title: "Location Reminder",
+      description: "Our app empowers you to effortlessly set location reminders. Never forget important tasks again; get notified when you're in the right place with our intuitive location reminder feature. ",
       onNext: (context) {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => Onboarding(
-              title: "Title 2",
-              description: "description 2",
+              title: "Explore Snaps",
+              description: "Discover the world through a new lens! Our app lets you explore captivating snaps tied to your location reminders. Immerse yourself in the moment and relive memories with ease.",
               onNext: (context) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => Onboarding(
-                      title: "title 3",
-                      description: "Description 3",
+                      title: "Experience",
+                      description: "Experience endless fun and excitement while exploring our app! Dive into a world of captivating content, interactive features, and surprises that will keep you entertained.",
                       onNext: (context) {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LoginView()
-                            ),
+                                builder: (context) => const LoginView()),
                             (route) => false);
                       },
                     ),
